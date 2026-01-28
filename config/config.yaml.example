@@ -1,0 +1,49 @@
+# 小红书爆文检测器配置
+
+# 搜索关键词（AI相关）
+search_keywords:
+  - "AI工具"
+  - "ChatGPT"
+  - "人工智能"
+  - "AI绘画"
+  - "AIGC"
+  - "Midjourney"
+  - "Stable Diffusion"
+  - "AI副业"
+  - "AI赚钱"
+  - "Claude"
+
+# 爆文检测阈值
+viral_detection:
+  # 最小阅读量（低于此值认为是低粉账号）
+  min_viral_views: 3000
+  # 账号平均阅读量阈值（低于此值认为是小账号）
+  max_avg_views: 500
+  # 爆文倍数（当前文章阅读量 / 平均阅读量）
+  viral_multiplier: 5
+
+# 抓取配置
+scraping:
+  # 每个关键词抓取的笔记数量
+  notes_per_keyword: 50
+  # 只抓取最近N天的内容
+  recent_days: 1
+  # 请求延迟（秒）
+  request_delay: 2
+
+# 定时任务
+schedule:
+  # 每天执行时间（24小时制）
+  daily_time: "07:00"
+  # 时区
+  timezone: "Asia/Shanghai"
+
+# 推送配置
+notification:
+  # 每日推送的爆文数量
+  top_n: 10
+  # 推送方式：email, telegram, wechat, feishu
+  methods:
+    - email
+  # 报告标题
+  title: "小红书AI爆文日报"
