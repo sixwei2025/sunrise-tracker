@@ -54,18 +54,30 @@ export class WebhookNotifier implements Notifier {
     try {
       const content = this.formatMarkdown(report);
 
-      // 企业微信格式
-      const payload = {
-        msgtype: 'markdown',
-        markdown: {
-          content,
-        },
-      };
+      let payload: any;
+
+      // 判断是否为Server酱
+      if (this.webhookUrl.includes('sctapi.ftqq.com')) {
+        // Server酱格式
+        payload = {
+          title: `📊 小红书AI爆文日报 - ${report.date}`,
+          desp: content,
+        };
+      } else {
+        // 企业微信/飞书/钉钉格式
+        payload = {
+          msgtype: 'markdown',
+          markdown: {
+            content,
+          },
+        };
+      }
 
       await axios.post(this.webhookUrl, payload);
       console.log('✅ Webhook通知发送成功');
     } catch (error) {
       console.error('❌ Webhook通知发送失败:', error);
+      throw error;
     }
   }
 
